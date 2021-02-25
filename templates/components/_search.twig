@@ -1,0 +1,21 @@
+{% set query = query ?? '' %}
+
+<form sprig>
+	<input type="text" name="query" value="{{ query }}" autofocus>
+	<input type="submit" value="Search">
+</form>
+
+<div class="results">
+	{% if query %}
+		{% set entries = craft.entries().search(query).orderBy('score').all() %}
+
+		{% if entries | length %}
+			{% for entry in entries %}
+				<h2>{{ entry.title }}</h2>
+			{% endfor %}
+        {% else %}
+            no results
+		{% endif %}
+
+	{% endif %}
+</div>
