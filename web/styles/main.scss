@@ -6,6 +6,20 @@ html {
     font-family: 'Courier New', Courier, monospace;
 }
 
+button {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 2px #4444;
+    color: #4444;
+    margin-top: 30px;
+
+    &:active,
+    &:focus {
+        outline: none;
+    }
+}
+
 .container {
     height: 100vh;
     width: 100%;
@@ -21,13 +35,19 @@ html {
         background-color: #ffff;
         padding: 40px;
         border-radius: 20px;
+        transition: all 0.3s;
 
         input[type=text] {
+
             &:focus,
             &:active {
                 outline: none;
+
+                form {
+                    box-shadow: 0px 20px 50px #444;
+                }
             }
-            
+
             padding: 10px;
             border-radius: 10px 0 0 10px;
             border: solid 2px #4444;
@@ -42,12 +62,14 @@ html {
             margin-left: -10px;
             background-color: #4444;
             color: #ffff;
+            cursor: pointer;
         }
     }
 
-    .results {
-        margin-top: 100px;
-        background: skyblue;
+    #results {
+        margin-top: 50px;
+        background: #fff;
+        box-shadow: 0px 20px 60px #9999;
         padding: 20px;
         border-radius: 20px;
     }

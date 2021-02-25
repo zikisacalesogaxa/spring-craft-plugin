@@ -1,20 +1,32 @@
 {% set query = query ?? '' %}
+{% set offset = offset ?? 0 %}
 
 <form sprig>
 	<input type="text" name="query" value="{{ query }}" autofocus>
 	<input type="submit" value="Search">
 </form>
 
-<div class="results">
+
+<div>
 	{% if query %}
-		{% set entries = craft.entries().search(query).orderBy('score').all() %}
+
+		<div id="results">
+			{% set entries = craft.entries().search(query).offset(offset).limit(_limit).all() %}
+
+			search results for "{{ query | upper }}"
+			{% if entries | length %}
+				{% for entry in entries %}
+					<h2>{{ entry.title }}</h2>
+				{% endfor %}
+			{% else %}
+				no results
+			{% endif %}
+		</div>
 
 		{% if entries | length %}
-			{% for entry in entries %}
-				<h2>{{ entry.title }}</h2>
-			{% endfor %}
-        {% else %}
-            no results
+			<div id="replace">
+				<button sprig s-val:offset="{{ offset + _limit }}" s-target="this" s-swap="outerHTML">Load more</button>
+			</div>
 		{% endif %}
 
 	{% endif %}

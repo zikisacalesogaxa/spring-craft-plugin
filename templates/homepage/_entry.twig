@@ -3,6 +3,8 @@
 {% block content %}
 	<main class="homepage">
 		<h1>{{ entry.title }}</h1>
-		{{ sprig('components/_search') }}
+		{{ sprig('components/_search', {
+            _limit: 1
+        }) }}
 	</main>
 {% endblock %}
